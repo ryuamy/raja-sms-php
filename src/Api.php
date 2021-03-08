@@ -24,7 +24,7 @@ class Api
     /**
      * Send HTTP Request to Raja SMS API.
      */
-    public static function sendRequest( string $baseUrl, string $serviceType, string $apikey, string $apiUsername, array $phoneNumber = [], array $smsMessage = [], string $callbackurl = '') : object
+    public static function sendRequest( string $baseUrl, string $serviceType, string $apikey, array $phoneNumber = [], array $smsMessage = [], string $apiUsername = '', string $callbackurl = '', string $whatsappId = '' ) : object
     {
         $baseUrl = $baseUrl.'/sms/';
 
@@ -140,6 +140,12 @@ class Api
             case 'CHECK_BALANCE':
             {
                 $baseUrl = $baseUrl.'api_sms_otp_balance_json.php';
+            }
+            break;
+            case 'CHECK_WA_BALANCE':
+            {
+                $senddata['waid'] = $callbackurl; 
+                $baseUrl = $baseUrl.'api_whatsapp_balance_json.php';
             }
             break;
         }
